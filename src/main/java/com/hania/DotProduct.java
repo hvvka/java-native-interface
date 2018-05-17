@@ -16,19 +16,22 @@ public class DotProduct {
     private Double[] b;
     private Double c;
 
-    // Test Driver
     public static void main(String[] args) {
         Double[] a = new Double[2];
         a[0] = 1.0;
         a[1] = 2.0;
 
         Double[] b = new Double[2];
-        b[0] = 2.0;
-        b[1] = 1.0;
+        b[0] = 3.0;
+        b[1] = 4.0;
 
         DotProduct dotProduct = new DotProduct();
-        Double result = dotProduct.multi01(a, b);
-        System.out.println(result);
+        System.out.println("Multi01: " + dotProduct.multi01(a, b));
+
+        dotProduct.setB(b);
+        System.out.println("Multi02: " + dotProduct.multi02(a));
+
+//        dotProduct.multi03();
     }
 
     public Double[] getA() {
@@ -55,26 +58,28 @@ public class DotProduct {
         this.c = c;
     }
 
-    /*
-     * zakładamy, że po stronie kodu natywnego wyliczony zostanie iloczyn skalarny dwóch wektorów
+    /**
+     * @return dot product of params a and b calculated in native code
      */
     public native Double multi01(Double[] a, Double[] b);
 
-    /*
-     * zakładamy, że drugi atrybut będzie pobrany z obiektu przekazanego do metody natywnej
+    /**
+     * The second product is transferred by this object.
+     * @return dot product
      */
     public native Double multi02(Double[] a);
 
-    /*
-     * zakładamy, że po stronie natywnej utworzone zostanie okienko na atrybuty,
-     * a po ich wczytaniu i przepisaniu do a, b obliczony zostanie wynik.
-     * Wynik powinna wyliczać metoda Javy multi04
-     * (korzystająca z parametrów a, b i wpisująca wynik do c).
+    /**
+     * In native code attributes window is invoked.
+     * The a and b are loaded and saved.
+     * Method multi04 counts the result to c that is displayed from native code.
      */
     public native void multi03();
 
+    /**
+     * Multiplies a and b. Saves the result to c.
+     */
     private void multi04() {
-        // mnoży a i b, wynik wpisuje do c
         IntStream.range(0, a.length)
                 .boxed()
                 .forEach(this::multiply);
