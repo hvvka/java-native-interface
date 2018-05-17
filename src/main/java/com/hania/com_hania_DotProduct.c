@@ -58,20 +58,19 @@ JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi01(JNIEnv *env, jobject
 JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi02(JNIEnv *env, jobject thisObj, jobjectArray a)
 {
     jclass thisClass = (*env)->GetObjectClass(env, thisObj);
-//    jclass doubleArrayClass = (*env)->FindClass(env, "[Ljava/lang/Double");
-    jfieldID bID = (*env)->GetFieldID(env, thisClass, "b", "[Ljava/lang/Double");
-    jobject b = (*env)->GetObjectField(env, thisObj, bID);
+    jfieldID bID = (*env)->GetFieldID(env, thisClass, "b", "[Ljava/lang/Double;");
+    if (bID == 0) printf("Failed to read field `b`!\n");
+    jobjectArray b = (*env)->GetObjectField(env, thisObj, bID);
 
+//    jsize lengthA = (*env)->GetArrayLength(env, a);
+//
+//
+//    jclass doubleClass = (*env)->FindClass(env, "java/lang/Double");
+//    jmethodID initDouble = (*env)->GetMethodID(env, doubleClass, "<init>", "(D)V");
+//
+//    jobject newDoubleObj = (*env)->NewObject(env, doubleClass, initDouble, 0.0);
 
-    jsize lengthA = (*env)->GetArrayLength(env, a);
-
-
-    jclass doubleClass = (*env)->FindClass(env, "java/lang/Double");
-    jmethodID initDouble = (*env)->GetMethodID(env, doubleClass, "<init>", "(D)V");
-
-    jobject newDoubleObj = (*env)->NewObject(env, doubleClass, initDouble, 0.0);
-
-    return newDoubleObj;
+    return Java_com_hania_DotProduct_multi01(env, thisObj, a, b);
 }
 
 /*
