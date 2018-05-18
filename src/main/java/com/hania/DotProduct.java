@@ -16,24 +16,6 @@ public class DotProduct {
     private Double[] b;
     private Double c;
 
-    public static void main(String[] args) {
-        Double[] a = new Double[2];
-        a[0] = 1.0;
-        a[1] = 2.0;
-
-        Double[] b = new Double[2];
-        b[0] = 3.0;
-        b[1] = 4.0;
-
-        DotProduct dotProduct = new DotProduct();
-        System.out.println("Multi01: " + dotProduct.multi01(a, b));
-
-        dotProduct.setB(b);
-        System.out.println("Multi02: " + dotProduct.multi02(a));
-
-//        dotProduct.multi03();
-    }
-
     public Double[] getA() {
         return a;
     }
@@ -80,8 +62,9 @@ public class DotProduct {
      * Multiplies a and b. Saves the result to c.
      */
     private void multi04() {
-        IntStream.range(0, a.length)
-                .boxed()
+        c = 0.0;
+        int length = Integer.min(a.length, b.length);
+        IntStream.range(0, length)
                 .forEach(this::multiply);
     }
 

@@ -59,16 +59,12 @@ JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi02(JNIEnv *env, jobject
 {
     jclass thisClass = (*env)->GetObjectClass(env, thisObj);
     jfieldID bID = (*env)->GetFieldID(env, thisClass, "b", "[Ljava/lang/Double;");
-    if (bID == 0) printf("Failed to read field `b`!\n");
+    if (bID == 0)
+    {
+        printf("Failed to read field b!\n");
+        return a;
+    }
     jobjectArray b = (*env)->GetObjectField(env, thisObj, bID);
-
-//    jsize lengthA = (*env)->GetArrayLength(env, a);
-//
-//
-//    jclass doubleClass = (*env)->FindClass(env, "java/lang/Double");
-//    jmethodID initDouble = (*env)->GetMethodID(env, doubleClass, "<init>", "(D)V");
-//
-//    jobject newDoubleObj = (*env)->NewObject(env, doubleClass, initDouble, 0.0);
 
     return Java_com_hania_DotProduct_multi01(env, thisObj, a, b);
 }
@@ -80,10 +76,30 @@ JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi02(JNIEnv *env, jobject
  */
 JNIEXPORT void JNICALL Java_com_hania_DotProduct_multi03(JNIEnv *env, jobject thisObj)
 {
-    jclass thisClass = (*env)->GetObjectClass(env, thisObj);
+	jclass thisClass = (*env)->GetObjectClass(env, thisObj);
+    jfieldID cID = (*env)->GetFieldID(env, thisClass, "c", "Ljava/lang/Double;");
+    if (cID == 0)
+    {
+        printf("Failed to read field `c`!\n");
+        return;
+    }
+
     jmethodID multi04ID = (*env)->GetMethodID(env, thisClass, "multi04", "()V");
+    if (multi04ID == 0)
+    {
+    	printf("Failed to read method multi04!\n");
+    	return;
+    }
 
-//     env->SetIntField(jc, iId, i * 2);
+    (*env)->CallVoidMethod(env, thisObj, multi04ID);
+    jobject c = (*env)->GetObjectField(env, thisObj, cID);
 
-//    jobject obj = (jobject) (*env)->CallObjectMethod(thisObje, jfindViewById, 3);
+    jclass doubleClass = (*env)->FindClass(env, "java/lang/Double");
+    jmethodID doubleValue = (*env)->GetMethodID(env, doubleClass, "doubleValue", "()D");
+    jdouble result = (*env)->CallDoubleMethod(env, c, doubleValue);
+    printf("c=%f\n", result);
+
+    (*env)->SetDoubleField(env, thisClass, cID, result);
+
+    (*env)->DeleteLocalRef(env, c);
 }
