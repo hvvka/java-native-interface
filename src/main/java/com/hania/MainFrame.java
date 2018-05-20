@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author <aTextField href="mailto:226154@student.pwr.edu.pl">Hanna Grodzicka</aTextField>
+ * @author <a href="mailto:226154@student.pwr.edu.pl">Hanna Grodzicka</a>
  */
 class MainFrame extends JFrame {
 
@@ -66,9 +66,6 @@ class MainFrame extends JFrame {
         multi01Button = new JButton("Multi01");
         multi02Button = new JButton("Multi02");
         multi03Button = new JButton("Multi03");
-        multi01Button.setBackground(Color.PINK);
-        multi02Button.setBackground(Color.ORANGE);
-        multi03Button.setBackground(Color.CYAN);
     }
 
     private void initButtonListeners() {

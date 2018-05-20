@@ -46,8 +46,11 @@ JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi01(JNIEnv *env, jobject
     //clean references
     (*env)->DeleteLocalRef(env, a);
     (*env)->DeleteLocalRef(env, b);
+    (*env)->DeleteLocalRef(env, aElement);
+    (*env)->DeleteLocalRef(env, bElement);
+    (*env)->DeleteLocalRef(env, doubleClass);
 
-     return newDoubleObj;
+    return newDoubleObj;
 }
 
 /*
@@ -66,6 +69,7 @@ JNIEXPORT jobject JNICALL Java_com_hania_DotProduct_multi02(JNIEnv *env, jobject
     }
     jobjectArray b = (*env)->GetObjectField(env, thisObj, bID);
 
+    (*env)->DeleteLocalRef(env, thisClass);
     return Java_com_hania_DotProduct_multi01(env, thisObj, a, b);
 }
 
@@ -101,5 +105,8 @@ JNIEXPORT void JNICALL Java_com_hania_DotProduct_multi03(JNIEnv *env, jobject th
 
     (*env)->SetDoubleField(env, thisClass, cID, result);
 
+    (*env)->DeleteLocalRef(env, thisClass);
+    (*env)->DeleteLocalRef(env, thisObj);
+    (*env)->DeleteLocalRef(env, doubleClass);
     (*env)->DeleteLocalRef(env, c);
 }
