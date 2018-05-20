@@ -1,20 +1,6 @@
 # java-native-interface
 
 
-## Setup
-
-Type in CLI path to JDK:
-```bash
-$ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home
-```
-
-or save to `~/.bash_profile`:
-```bash
-$ echo "export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home" >> ~/.bash_profile
-$ source ~/.bash_profile
-```
-
-
 ## Run
 
 The simplest way:
@@ -22,7 +8,7 @@ The simplest way:
 $ ./gradlew run
 ```
 
-And others:
+Other possibilities:
 
 #### Bash script
 
@@ -31,7 +17,7 @@ $ cd src/main/java
 $ ./compile.sh
 ```
 
-### Steps (manual)
+#### Steps from script (manual)
 
 Compile Java program and generate header file:
 ```bash
@@ -54,4 +40,20 @@ $ java -Djava.library.path=./com/hania/. com/hania/MainFrame
 
 ```bash
 $ ./gradlew test
+```
+
+
+## Setup
+
+Linking `jni.h` requires environmental variable `JAVA_HOME` to be set.
+
+Type in CLI path to your JDK:
+```bash
+$ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdkX.X.X_X.jdk/Contents/Home
+```
+
+or save to `~/.bash_profile`:
+```bash
+$ echo "export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdkX.X.X_X.jdk/Contents/Home" >> ~/.bash_profile
+$ source ~/.bash_profile
 ```
