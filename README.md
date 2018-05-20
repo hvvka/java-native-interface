@@ -1,5 +1,6 @@
 # java-native-interface
 
+
 ## Setup
 
 Type in CLI path to JDK:
@@ -16,6 +17,15 @@ $ source ~/.bash_profile
 
 ## Run
 
+The simplest way:
+```bash
+$ ./gradlew run
+```
+
+And others:
+
+#### Bash script
+
 ```bash
 $ cd src/main/java
 $ ./compile.sh
@@ -25,15 +35,23 @@ $ ./compile.sh
 
 Compile Java program and generate header file:
 ```bash
-$ javac -h com/hania com/hania/DotProduct.java com/hania/MainFrame.java
+$ cd src/main/java
+$ javac -h ../../dotproduct/c com/hania/DotProduct.java com/hania/MainFrame.java
 ```
 
 Compile C program:
 ```bash
-$ gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin" -dynamiclib -o com/hania/libdotproduct.dylib com/hania/com_hania_DotProduct.c
+$ gcc -I"$JAVA_HOME/include" -I"$JAVA_HOME/include/darwin" -dynamiclib -o com/hania/libdotproduct.dylib ../../dotproduct/c/com_hania_DotProduct.c
 ```
 
 Run the Java program:
 ```bash
-$ java -Djava.library.path=./com/hania/. com/hania/DotProduct
+$ java -Djava.library.path=./com/hania/. com/hania/MainFrame
+```
+
+
+## Tests
+
+```bash
+$ ./gradlew test
 ```

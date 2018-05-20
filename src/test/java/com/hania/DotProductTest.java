@@ -59,11 +59,12 @@ public class DotProductTest {
 
     @Test
     public void multi03() {
+        dotProduct = new DotProduct();
         // given
-        Double[] a = new Double[3];
+        Double[] a = new Double[2];
         a[0] = -1.4;
         a[1] = 0.4;
-        Double[] b = new Double[3];
+        Double[] b = new Double[1];
         b[0] = 2.0;
 
         // when

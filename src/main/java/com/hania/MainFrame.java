@@ -2,6 +2,8 @@ package com.hania;
 
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,9 +82,10 @@ class MainFrame extends JFrame {
 
         DotProduct dotProduct = new DotProduct();
         Double result = dotProduct.multi01(aList.toArray(new Double[0]), bList.toArray(new Double[0]));
+        Double truncated = getTruncatedDouble(result);
 
         cTextField.setText("");
-        cTextField.setText(String.valueOf(result));
+        cTextField.setText(String.valueOf(truncated));
         cTextField.setBackground(Color.PINK);
     }
 
@@ -93,9 +96,10 @@ class MainFrame extends JFrame {
         DotProduct dotProduct = new DotProduct();
         dotProduct.setB(bList.toArray(new Double[0]));
         Double result = dotProduct.multi02(aList.toArray(new Double[0]));
+        Double truncated = getTruncatedDouble(result);
 
         cTextField.setText("");
-        cTextField.setText(String.valueOf(result));
+        cTextField.setText(String.valueOf(truncated));
         cTextField.setBackground(Color.ORANGE);
     }
 
@@ -109,8 +113,16 @@ class MainFrame extends JFrame {
         dotProduct.multi03();
 
         cTextField.setText("");
-        cTextField.setText(String.valueOf(dotProduct.getC()));
+        Double result = dotProduct.getC();
+        Double truncated = getTruncatedDouble(result);
+        cTextField.setText(String.valueOf(truncated));
         cTextField.setBackground(Color.CYAN);
+    }
+
+    private Double getTruncatedDouble(Double result) {
+        return BigDecimal.valueOf(result)
+                .setScale(4, RoundingMode.HALF_UP)
+                .doubleValue();
     }
 
     private List<Double> getProduct(JTextField textField) {
